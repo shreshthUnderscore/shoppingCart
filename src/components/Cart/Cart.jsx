@@ -3,7 +3,6 @@ import Navigation from "../Navigation/Navigation";
 const Cart = () => {
   return (
     <>
-      <Navigation />
       <h1>Cart Page</h1>
     </>
   );
