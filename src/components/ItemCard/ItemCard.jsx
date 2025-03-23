@@ -14,13 +14,16 @@ const ItemCard = ({ data }) => {
   };
   const handleDecrement = (event) => {
     event.preventDefault();
-    if (itemCount != 1) {
+    if (itemCount > 0) {
       setItemCount(itemCount - 1);
     }
   };
 
   const addToCart = (event) => {
     event.preventDefault();
+    if (itemCount == 0) {
+      return;
+    }
 
     setCart([...cart, { id: data.id, amount: itemCount }]);
     toggleAddOrUpdateBtn(!addOrUpdateBtn);
@@ -28,15 +31,27 @@ const ItemCard = ({ data }) => {
 
   const updateCart = (event) => {
     event.preventDefault();
-    setCart(
-      cart.map((item) => {
-        if (item.id == data.id) {
-          return { id: item.id, amount: itemCount };
-        } else {
-          return item;
-        }
-      })
-    );
+
+    if (itemCount == 0) {
+      //remove item from list of items
+      setCart(
+        cart.filter((item) => {
+          item.id != data.id;
+        })
+      );
+      toggleAddOrUpdateBtn(!addOrUpdateBtn);
+    } else {
+      //update the amount of items in the array
+      setCart(
+        cart.map((item) => {
+          if (item.id == data.id) {
+            return { id: item.id, amount: itemCount };
+          } else {
+            return item;
+          }
+        })
+      );
+    }
   };
 
   const handleInputChange = (event) => {
