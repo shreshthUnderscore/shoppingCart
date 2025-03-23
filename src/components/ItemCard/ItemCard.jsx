@@ -25,7 +25,10 @@ const ItemCard = ({ data }) => {
       return;
     }
 
-    setCart([...cart, { id: data.id, amount: itemCount }]);
+    setCart([
+      ...cart,
+      { id: data.id, title: data.title, image: data.image, amount: itemCount },
+    ]);
     toggleAddOrUpdateBtn(!addOrUpdateBtn);
   };
 
@@ -45,7 +48,12 @@ const ItemCard = ({ data }) => {
       setCart(
         cart.map((item) => {
           if (item.id == data.id) {
-            return { id: item.id, amount: itemCount };
+            return {
+              id: data.id,
+              title: data.title,
+              image: data.image,
+              amount: itemCount,
+            };
           } else {
             return item;
           }
