@@ -20,12 +20,8 @@ const Navigation = () => {
     fetchData();
   }, []);
 
-  function handleClick(event) {
-    setCart((prevItem) => [...prevItem, event.target.getAttribute("id")]);
-  }
-
   useEffect(() => {
-    console.log(cart);
+    console.log("value of cart: ", cart);
   }, [cart]);
 
   return (
@@ -41,7 +37,7 @@ const Navigation = () => {
           <Link to="/cart">Cart {cart.length}</Link>
         </li>
       </ul>
-      <Outlet context={{ productData, cart, handleClick }} />
+      <Outlet context={{ productData, cart, setCart }} />
     </div>
   );
 };
